@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Subash S — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --maroon: #7B0D2A;
+    --maroon-light: #F3E8EC;
+    --maroon-mid: #B5385A;
+    --dark: #0F0F0F;
+    --gray: #6B7280;
+    --light-gray: #F8F7F5;
+    --border: #E5E2DF;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+    z-index: 100; padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between; height: 60px;
+  }
+  .nav-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--maroon); letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--maroon); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 100px 2rem 60px;
+    background: linear-gradient(135deg, #fdfcfc 0%, #f8f2f4 50%, #fdfcfc 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,13,42,0.06) 0%, transparent 70%);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .hero-tag { display: inline-block; background: var(--maroon-light); color: var(--maroon); font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 1.25rem; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; color: var(--dark); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 1.25rem; }
+  .hero h1 span { color: var(--maroon); }
+  .hero-desc { font-size: 1.05rem; color: var(--gray); line-height: 1.75; margin-bottom: 2rem; max-width: 480px; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--maroon); color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { background: #5e0a20; transform: translateY(-1px); }
+  .btn-outline { border: 1.5px solid var(--maroon); color: var(--maroon); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+  .btn-outline:hover { background: var(--maroon-light); }
+
+  .hero-visual { position: relative; }
+  .hero-card { background: white; border-radius: 16px; border: 1px solid var(--border); padding: 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+  .hero-card-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+  .avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--maroon); display: flex; align-items: center; justify-content: center; color: white; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+  .hero-card-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; }
+  .hero-card-role { font-size: 0.8rem; color: var(--gray); }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+  .stat-item { background: var(--light-gray); border-radius: 10px; padding: 1rem; }
+  .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--maroon); }
+  .stat-label { font-size: 0.72rem; color: var(--gray); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .skills-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-pill { background: var(--maroon-light); color: var(--maroon); font-size: 0.72rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+
+  /* SECTIONS */
+  section { padding: 80px 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--maroon); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--dark); letter-spacing: -0.75px; margin-bottom: 0.75rem; }
+  .section-sub { font-size: 1rem; color: var(--gray); max-width: 540px; line-height: 1.7; }
+  .section-header { margin-bottom: 3rem; }
+
+  /* ABOUT */
+  .about-section { background: var(--light-gray); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { font-size: 0.975rem; color: #374151; line-height: 1.8; margin-bottom: 1rem; }
+  .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+  .highlight-item { background: white; border-radius: 12px; border: 1px solid var(--border); padding: 1.25rem; display: flex; gap: 1rem; align-items: flex-start; }
+  .highlight-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--maroon-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .highlight-icon svg { width: 18px; height: 18px; stroke: var(--maroon); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .highlight-title { font-weight: 600; font-size: 0.875rem; margin-bottom: 3px; }
+  .highlight-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+  .skill-card { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: all 0.2s; }
+  .skill-card:hover { border-color: var(--maroon-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,13,42,0.08); }
+  .skill-card-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--maroon-light); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .skill-card-icon svg { width: 20px; height: 20px; stroke: var(--maroon); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .skill-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.75rem; }
+  .skill-tag { background: var(--light-gray); color: #374151; font-size: 0.7rem; font-weight: 500; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); }
+
+  /* PROJECTS */
+  .projects-section { background: var(--dark); }
+  .projects-section .section-eyebrow { color: var(--maroon-mid); }
+  .projects-section .section-title { color: white; }
+  .projects-section .section-sub { color: #9CA3AF; }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card { background: #1A1A1A; border: 1px solid #2D2D2D; border-radius: 16px; padding: 2rem; transition: all 0.2s; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--maroon), var(--maroon-mid)); }
+  .project-card:hover { border-color: #444; transform: translateY(-3px); }
+  .project-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(123,13,42,0.25); color: #D4758A; font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 1rem; border: 1px solid rgba(123,13,42,0.4); text-transform: uppercase; letter-spacing: 0.5px; }
+  .project-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: white; margin-bottom: 0.75rem; line-height: 1.3; }
+  .project-card p { font-size: 0.875rem; color: #9CA3AF; line-height: 1.7; margin-bottom: 1.25rem; }
+  .project-impact { background: rgba(123,13,42,0.12); border: 1px solid rgba(123,13,42,0.2); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; }
+  .project-impact-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--maroon-mid); margin-bottom: 3px; }
+  .project-impact p { font-size: 0.8rem; color: #D1D5DB; margin: 0; line-height: 1.5; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tech-tag { background: #2D2D2D; color: #D1D5DB; font-size: 0.7rem; font-weight: 500; padding: 4px 10px; border-radius: 6px; border: 1px solid #3D3D3D; }
+
+  /* EXPERIENCE */
+  .exp-timeline { position: relative; padding-left: 2rem; }
+  .exp-timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--maroon), var(--maroon-light)); border-radius: 2px; }
+  .exp-item { position: relative; padding-bottom: 2.5rem; }
+  .exp-item::before { content: ''; position: absolute; left: -2.4rem; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--maroon); border: 2px solid white; box-shadow: 0 0 0 3px var(--maroon-light); }
+  .exp-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .exp-company { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--maroon); }
+  .exp-role { font-size: 0.875rem; color: var(--gray); }
+  .exp-date { font-size: 0.75rem; font-weight: 600; background: var(--maroon-light); color: var(--maroon); padding: 3px 10px; border-radius: 20px; }
+  .exp-bullets { list-style: none; margin-top: 0.75rem; }
+  .exp-bullets li { font-size: 0.875rem; color: #374151; line-height: 1.7; padding: 4px 0 4px 1.25rem; position: relative; }
+  .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--maroon); font-size: 0.75rem; top: 6px; }
+
+  /* EDUCATION */
+  .edu-section { background: var(--light-gray); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .edu-card { background: white; border-radius: 14px; border: 1px solid var(--border); padding: 1.75rem; }
+  .edu-degree-tag { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--maroon); background: var(--maroon-light); padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 1rem; }
+  .edu-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .edu-card .uni { font-size: 0.875rem; color: var(--gray); margin-bottom: 0.25rem; }
+  .edu-card .year { font-size: 0.8rem; color: var(--gray); }
+  .edu-modules { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  .edu-modules-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 0.5rem; }
+  .edu-module-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .edu-module-tag { background: var(--light-gray); color: #374151; font-size: 0.7rem; padding: 3px 8px; border-radius: 5px; border: 1px solid var(--border); }
+
+  /* CONTACT */
+  .contact-inner { background: var(--maroon); border-radius: 20px; padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .contact-inner .section-eyebrow { color: rgba(255,255,255,0.6); }
+  .contact-inner .section-title { color: white; }
+  .contact-inner .section-sub { color: rgba(255,255,255,0.75); }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem 1.25rem; border: 1px solid rgba(255,255,255,0.15); text-decoration: none; transition: background 0.2s; }
+  .contact-item:hover { background: rgba(255,255,255,0.18); }
+  .contact-icon { width: 38px; height: 38px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 17px; height: 17px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.55); }
+  .contact-value { font-size: 0.9rem; color: white; font-weight: 500; margin-top: 1px; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--gray); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .hero-inner, .about-grid, .projects-grid, .edu-grid, .contact-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 60px 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Subash S</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Open to Opportunities · Chennai</div>
+      <h1>Turning Data<br/>Into <span>Decisions</span></h1>
+      <p class="hero-desc">M.Sc. Data Science graduate with hands-on experience in ETL pipelines, K-Means clustering, and real-world data quality operations. I make complex data simple and actionable.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects →</a>
+        <a href="#contact" class="btn-outline">Hire Me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="avatar">SS</div>
+          <div>
+            <div class="hero-card-name">Subash S</div>
+            <div class="hero-card-role">Data Analyst · Chennai, India</div>
+          </div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-num">2+</div>
+            <div class="stat-label">Projects Delivered</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">10K+</div>
+            <div class="stat-label">Records Processed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">M.Sc.</div>
+            <div class="stat-label">Data Science</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Core Tools</div>
+          </div>
+        </div>
+        <div class="skills-row">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Pandas</span>
+          <span class="skill-pill">NumPy</span>
+          <span class="skill-pill">ETL</span>
+          <span class="skill-pill">K-Means</span>
+          <span class="skill-pill">EDA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-header">
+          <div class="section-eyebrow">About Me</div>
+          <h2 class="section-title">A data professional who thinks in patterns</h2>
+        </div>
+        <div class="about-text">
+          <p>I'm a Data Science postgraduate from Vels University with a strong foundation in mathematics, statistical analysis, and machine learning. Currently working as a Data Associate at Straive, where I process and validate large-scale datasets daily.</p>
+          <p>My real passion is building end-to-end data pipelines and uncovering hidden patterns in data. My ETL project for application tracking and K-Means customer segmentation work reflect a hands-on approach — I don't just learn tools, I apply them to real problems.</p>
+          <p>I'm actively seeking a Data Analyst role where I can contribute immediately and grow with a data-driven team.</p>
+        </div>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <div class="highlight-title">ETL Pipeline Design</div>
+            <div class="highlight-desc">Built end-to-end data extraction, transformation, and loading pipelines using Python and Pandas — eliminating manual data handling.</div>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <div>
+            <div class="highlight-title">ML Modelling</div>
+            <div class="highlight-desc">Applied K-Means clustering to segment 10,000+ customer records, going beyond standard regression to deliver richer business insight.</div>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div>
+            <div class="highlight-title">Data Quality Operations</div>
+            <div class="highlight-desc">Daily quality audits on 10K+ records at Straive, with systematic anomaly detection and detailed integrity reporting.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Capabilities</div>
+      <h2 class="section-title">Tools &amp; Skills</h2>
+      <p class="section-sub">A full stack of data analytics tools — from raw data extraction to final visualised insights.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Programming</h3>
+        <p style="font-size:0.8rem;color:#6B7280;margin-top:4px;">Core language for all data work</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>Machine Learning</h3>
+        <p style="font-size:0.8rem;color:#6B7280;margin-top:4px;">Predictive &amp; unsupervised models</p>
+        <div class="skill-tags">
+          <span class="skill-tag">K-Means Clustering</span><span class="skill-tag">Linear Regression</span><span class="skill-tag">Silhouette Score</span><span class="skill-tag">Elbow Method</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Data Analysis &amp; EDA</h3>
+        <p style="font-size:0.8rem;color:#6B7280;margin-top:4px;">From raw data to insight</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Exploratory Analysis</span><span class="skill-tag">Trend Identification</span><span class="skill-tag">KPI Reporting</span><span class="skill-tag">Anomaly Detection</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Data Engineering</h3>
+        <p style="font-size:0.8rem;color:#6B7280;margin-top:4px;">Pipeline design &amp; data ops</p>
+        <div class="skill-tags">
+          <span class="skill-tag">ETL Pipelines</span><span class="skill-tag">Data Cleaning</span><span class="skill-tag">Preprocessing</span><span class="skill-tag">Boundary Testing</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Visualisation</h3>
+        <p style="font-size:0.8rem;color:#6B7280;margin-top:4px;">Communicating data stories</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span><span class="skill-tag">Dashboard Reports</span><span class="skill-tag">Excel</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Communication</h3>
+        <p style="font-size:0.8rem;color:#6B7280;margin-top:4px;">Insights that land with anyone</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Stakeholder Reporting</span><span class="skill-tag">Documentation</span><span class="skill-tag">Defect Logging</span><span class="skill-tag">Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-section" id="projects">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Portfolio</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-sub">Real problems. Real data. Real outcomes.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-badge">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          ETL Pipeline
+        </div>
+        <h3>Application Tracking System</h3>
+        <p>End-to-end ETL pipeline that extracts applicant records from multiple raw file formats, transforms and validates them using Pandas, and loads a clean analysis-ready dataset — automating a previously manual tracking process.</p>
+        <div class="project-impact">
+          <div class="project-impact-label">Key Outcome</div>
+          <p>Eliminated manual data handling for 1,000+ records · Automated pipeline throughput reporting · Zero data loss across load cycles</p>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">NumPy</span>
+          <span class="tech-tag">ETL Design</span>
+          <span class="tech-tag">Data Validation</span>
+          <span class="tech-tag">Automation</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/></svg>
+          ML · Clustering
+        </div>
+        <h3>Customer Segmentation — K-Means</h3>
+        <p>Applied unsupervised machine learning to segment 10,000+ customer records into actionable groups. Used Elbow Method to determine optimal k, validated with Silhouette Score, and delivered segment profiles for business strategy.</p>
+        <div class="project-impact">
+          <div class="project-impact-label">Key Outcome</div>
+          <p>Identified distinct customer segments · Silhouette-validated cluster quality · Visualised insights for non-technical stakeholders</p>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Scikit-learn</span>
+          <span class="tech-tag">K-Means</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">Matplotlib</span>
+          <span class="tech-tag">Seaborn</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Work History</div>
+      <h2 class="section-title">Professional Experience</h2>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">Straive</span>
+          <span class="exp-role">Data Associate</span>
+          <span class="exp-date">March 2026 – Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Perform daily quality audits on datasets of 10,000+ records, ensuring 100% compliance with client data specifications and flagging systemic anomalies.</li>
+          <li>Conduct pattern-level analysis across verification logs — identifying trends in data integrity failures equivalent to real-world EDA workflows.</li>
+          <li>Document and report formatting bugs, logic inconsistencies, and boundary violations, with structured defect logs used for process improvement.</li>
+          <li>Collaborate cross-functionally to communicate data quality findings and implement corrective actions, improving pipeline accuracy and delivery timelines.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="edu-section" id="education">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Academic Background</div>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <span class="edu-degree-tag">Postgraduate</span>
+        <h3>M.Sc. Data Science &amp; Business Analytics</h3>
+        <div class="uni">Vels University, Chennai</div>
+        <div class="year">August 2022 – July 2024</div>
+        <div class="edu-modules">
+          <div class="edu-modules-label">Core Modules</div>
+          <div class="edu-module-tags">
+            <span class="edu-module-tag">Machine Learning</span>
+            <span class="edu-module-tag">Statistical Analysis</span>
+            <span class="edu-module-tag">Python Programming</span>
+            <span class="edu-module-tag">Data Visualisation</span>
+            <span class="edu-module-tag">Business Intelligence</span>
+            <span class="edu-module-tag">Big Data Analytics</span>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <span class="edu-degree-tag">Undergraduate</span>
+        <h3>B.Sc. Mathematics</h3>
+        <div class="uni">Meenakshi Ammal Arts &amp; Science College, Chennai</div>
+        <div class="year">August 2019 – July 2022</div>
+        <div class="edu-modules">
+          <div class="edu-modules-label">Foundation</div>
+          <div class="edu-module-tags">
+            <span class="edu-module-tag">Statistical Theory</span>
+            <span class="edu-module-tag">Linear Algebra</span>
+            <span class="edu-module-tag">Mathematical Modelling</span>
+            <span class="edu-module-tag">Quantitative Reasoning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div>
+        <div class="section-eyebrow">Get In Touch</div>
+        <h2 class="section-title">Let's work together</h2>
+        <p class="section-sub">I'm actively seeking Data Analyst opportunities in Chennai. Let's talk about how I can add value to your team.</p>
+      </div>
+      <div class="contact-links">
+        <a href="tel:+919791587937" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+91 9791587937</div>
+          </div>
+        </a>
+        <a href="mailto:Mrsubashselvaraj@gmail.com" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">Mrsubashselvaraj@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/Subashselvaraj" target="_blank" class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/Subashselvaraj</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Subash S · Data Analyst · Chennai, Tamil Nadu · </p>
+</footer>
+
+</body>
+</html>
